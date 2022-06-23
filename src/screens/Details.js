@@ -1,18 +1,34 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { BREADS } from '../data/breads'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+// import { BREADS } from '../data/breads'
+import { getItemById } from '../app/services/prods'
 
 const Details = ({route}) => {
-  const pan = BREADS.find(obj => obj.id === route.params.id)
+  const [prods, setProds] = useState([]);
+  useEffect(() => {
+    getItemById(route.params.id).then((res) => {
+      setProds(res);
+      console.log(res);
+    });
+  }, []);
+
+  const addToCart = () => {
+    alert('Teniente Dan te encargas vos')
+  }
+
+  // const pan = BREADS.find(obj => obj.id === route.params.id)
   return (
+    <>
     <View style={styles.context}>
       <Text style={styles.item}>
-        {pan.name}
+        {prods.name}
       </Text>
       <Text style={styles.item}>
-        {pan.price}
+        ${prods.price}
       </Text>
     </View>
+    <TouchableOpacity onPress={addToCart}><Text>Agregar al carrito</Text></TouchableOpacity>
+    </>
   )
 }
 

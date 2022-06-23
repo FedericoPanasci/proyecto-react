@@ -1,18 +1,28 @@
-import React from 'react'
-import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { FlatList, View } from 'react-native'
 import GridItem from '../components/GridItem'
-import { CATEGORIES } from '../data/categories'
+import { getItems } from '../app/services/category'
 
 const Home = ({ navigation }) => {
+  const [prods, setProds] = useState([]);
+  useEffect(() => {
+    getItems().then((res) => {
+      setProds(res);
+      console.log(res);
+    });
+  }, []);
+
   return (
+    <>
     <View>
-        <FlatList 
-        data={CATEGORIES}
-        renderItem={({item}) => <GridItem item={item} navigation={navigation}/>}
-        keyExtractor={(item) => item.id}
-        ></FlatList>
+      <FlatList
+      data={prods}
+      renderItem={({item}) => <GridItem item={item} navigation={navigation}/>}
+      keyExtractor={(item) => item.id}
+      ></FlatList>
     </View>
-  )
+    </>
+    )
 }
 
 export default Home

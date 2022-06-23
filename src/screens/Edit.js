@@ -71,12 +71,7 @@ const Edit = () => {
             </TouchableOpacity>
           )}
         />
-        <Modal
-          style={styles.modal}
-          visible={modalVisible}
-          animationType="slide"
-          transparent='true'
-        >
+        <Modal visible={modalVisible} animationType="slide" transparent="true">
           <View style={styles.modalView}>
             <TouchableOpacity onPress={onHandlerDelete}>
               borrar
@@ -120,16 +115,16 @@ const Edit = () => {
 export default Edit;
 
 const styles = StyleSheet.create({
-  modal: {
-  },
   modalView: {
-    width:200,
+    width: 200,
     height: 100,
-    borderRadius:25,
-    alignContent:'center',
-    justifyContent:'center',
-    alignItems:'center',
-    marginTop:20,
+    borderRadius: 25,
+    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    marginLeft: 40,
+    marginRight: 40,
     backgroundColor: "rgb(21, 134, 158)",
     color: "rgb(80, 28, 17)",
     flexDirection: "row",
