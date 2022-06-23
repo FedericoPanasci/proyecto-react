@@ -1,7 +1,9 @@
 import React from 'react';
 import Home from '../stacks/index';
 import Cart from '../screens/Cart';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Edit from '../screens/Edit';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -32,6 +34,19 @@ export default () => (
                 <View>
                     <Ionicons name="cart" size={30} color="#rgb(21, 134, 158)"/>
                     <Text style={styles.title}>Cart</Text>
+                </View>
+            }}
+        />      
+        <Tab.Screen name='Edit' component={Edit}
+            options={{
+                title: 'edit',
+                headerShown: false,
+                tabBarShowLabel:false,
+                tabBarStyle: styles.tabBar,
+                tabBarIcon: () => 
+                <View>
+                    <AntDesign name="edit" size={30} color="#rgb(21, 134, 158)"/>
+                    <Text style={styles.title}>Edit</Text>
                 </View>
             }}
         />      
