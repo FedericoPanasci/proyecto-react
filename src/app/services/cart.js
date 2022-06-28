@@ -1,7 +1,7 @@
 import { collection, getDocs, query, doc, getDoc, addDoc, deleteDoc, updateDoc, where } from "firebase/firestore";
 import { db } from '../firebase';
 
-const itemsCollection = collection(db, 'categorias');
+const itemsCollection = collection(db, 'carrito');
 
 // CREATE
 export const createItem= (obj) => {

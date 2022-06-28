@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-// import { BREADS } from '../data/breads'
 import { getItemById } from '../app/services/prods'
+import { createItem } from '../app/services/cart'
 
 const Details = ({route}) => {
   const [prods, setProds] = useState([]);
   useEffect(() => {
     getItemById(route.params.id).then((res) => {
       setProds(res);
-      console.log(res);
     });
   }, []);
 
   const addToCart = () => {
-    alert('Teniente Dan te encargas vos')
+    createItem(prods);
   }
 
-  // const pan = BREADS.find(obj => obj.id === route.params.id)
   return (
     <>
     <View style={styles.context}>

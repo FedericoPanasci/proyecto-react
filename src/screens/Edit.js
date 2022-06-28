@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { getItems, createItem, deleteItem } from "../app/services/prods";
+import { getItems, createItem, deleteItem, updateItem } from "../app/services/prods";
 
 const Edit = () => {
   const [category, setCategory] = useState("");
@@ -54,6 +54,16 @@ const Edit = () => {
     setModalVisible(false);
   };
 
+  const editProd = () => {
+    updateItem(itemSelected.id, {
+      category: category,
+      name: name,
+      description: description,
+      weight: weight,
+      price: price,
+    })
+  }
+
   return (
     <>
       <View>
@@ -67,16 +77,22 @@ const Edit = () => {
                 setModalVisible(true);
               }}
             >
-              <Text>{item.name}</Text>
+              <Text style={styles.item}>{item.name}</Text>
             </TouchableOpacity>
           )}
+          keyExtractor={(item) => item.id}
         />
         <Modal visible={modalVisible} animationType="slide" transparent="true">
           <View style={styles.modalView}>
             <TouchableOpacity onPress={onHandlerDelete}>
               borrar
             </TouchableOpacity>
-            <TouchableOpacity onPress={closeModal}>volver</TouchableOpacity>
+            <TouchableOpacity onPress={editProd}>
+              editar
+            </TouchableOpacity>
+            <TouchableOpacity onPress={closeModal}>
+              volver
+            </TouchableOpacity>
           </View>
         </Modal>
       </View>
@@ -129,5 +145,12 @@ const styles = StyleSheet.create({
     color: "rgb(80, 28, 17)",
     flexDirection: "row",
     justifyContent: "space-around",
-  },
+  }, item: {
+      paddingBottom: 5,
+      marginTop: 2,
+      marginBottom: 5,
+      textAlign: "center",
+      color: "rgb(21, 134, 158)",
+      backgroundColor: "rgb(80, 28, 17)",
+    }
 });
