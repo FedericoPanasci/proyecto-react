@@ -25,7 +25,7 @@ const Details = ({route}) => {
         ${prods.price}
       </Text>
     </View>
-    <TouchableOpacity onPress={addToCart}><Text>Agregar al carrito</Text></TouchableOpacity>
+    <TouchableOpacity onPress={addToCart}><Text style={styles.agregar}>Agregar al carrito</Text></TouchableOpacity>
     </>
   )
 }
@@ -41,5 +41,12 @@ const styles = StyleSheet.create({
     backgroundColor:'rgb(80, 28, 17)'
   }, item:{
     color:'rgb(21, 134, 158)' 
+  }, agregar: {
+    paddingBottom: 5,
+    marginTop: 2,
+    marginBottom: 5,
+    textAlign: "center",
+    color: "rgb(80, 28, 17)",
+    backgroundColor: "rgb(21, 134, 158)",
   }
 })

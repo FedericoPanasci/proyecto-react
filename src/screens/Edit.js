@@ -85,13 +85,19 @@ const Edit = () => {
         <Modal visible={modalVisible} animationType="slide" transparent="true">
           <View style={styles.modalView}>
             <TouchableOpacity onPress={onHandlerDelete}>
-              borrar
+              <Text>
+                borrar
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={editProd}>
-              editar
+              <Text>
+                editar
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={closeModal}>
-              volver
+              <Text>
+                volver
+              </Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -120,7 +126,9 @@ const Edit = () => {
             onChange={(text) => setPrice(text.target.value)}
           />
           <TouchableOpacity onPress={addProd}>
-            Agregar producto
+            <Text>
+              Agregar producto
+            </Text>
           </TouchableOpacity>
         </Text>
       </View>
