@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { singUp } from '../app/services/api'
+import { singIn } from '../app/services/api'
 
-const Register = ({navigation}) => {
+const Access = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -12,22 +12,12 @@ const Register = ({navigation}) => {
     <View>
         <TextInput style={styles.input} onChangeText={(text) => setEmail(text)} placeholder={'escriba su cuenta'} />
         <TextInput style={styles.input} onChangeText={(text) => setPassword(text)} placeholder={'escriba su contraseña'}/>
-        <TouchableOpacity style={styles.boton} onPress={async () => {
-                await singUp(email, password)
-                navigation.navigate('Login');
+        <TouchableOpacity style={styles.boton} onPress={async() => {
+                await singIn(email, password)
                 }
             }>
             <Text style={styles.text}>
-                Registrar
-            </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.boton} onPress={async() =>{
-                navigation.navigate('Login');
-                }
-            }>
-            <Text style={styles.text}>
-                ir a login
+                Login
             </Text>
         </TouchableOpacity>
     </View>
@@ -35,7 +25,7 @@ const Register = ({navigation}) => {
   )
 }
 
-export default Register
+export default Access
 
 const styles = StyleSheet.create({
     input: {

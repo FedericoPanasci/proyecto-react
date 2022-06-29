@@ -4,8 +4,10 @@ import Cart from '../screens/Cart';
 import Edit from '../screens/Edit';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
+import auth from '../stacks/auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +51,20 @@ export default () => (
                     <Text style={styles.title}>Edit</Text>
                 </View>
             }}
-        />      
+        />
+        <Tab.Screen name='Auth' component={auth}
+            options={{
+                title: 'auth',
+                headerShown: false,
+                tabBarShowLabel:false,
+                tabBarStyle: styles.tabBar,
+                tabBarIcon: () => 
+                <View>
+                    <MaterialCommunityIcons name="account" size={30} color="#rgb(21, 134, 158)"/>
+                    <Text style={styles.title}>Auth</Text>
+                </View>
+            }}
+        />            
     </Tab.Navigator>
 );
 
