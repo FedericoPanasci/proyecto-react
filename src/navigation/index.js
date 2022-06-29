@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Main from '../tabs/';
 import { auth } from '../app/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import Auth from '../stacks/auth';
+import AuthNavigator from '../stacks/auth';
 
 const Nav = () => {
     const [isLogged, setIsLogged] = useState(false);
@@ -12,15 +12,17 @@ const Nav = () => {
         onAuthStateChanged(auth, (user) => {
             if(user){
                 setIsLogged(true);
-                console.log('estoy en index');
+                console.log('user is logged');
                 console.log(user);
-            }
+            } else (
+                setIsLogged(false)
+            )
         })
     }, [])
     return(
         <NavigationContainer>
         {
-            isLogged ? <Main/> : <Auth/> 
+            isLogged ? <Main/> : <AuthNavigator/> 
         }
         </NavigationContainer>
         )

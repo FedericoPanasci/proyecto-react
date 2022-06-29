@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { singUp } from '../app/services/api'
+import { signUp } from '../app/services/api'
 
 const Register = ({navigation}) => {
     const [email, setEmail] = useState();
@@ -13,7 +13,7 @@ const Register = ({navigation}) => {
         <TextInput style={styles.input} onChangeText={(text) => setEmail(text)} placeholder={'escriba su cuenta'} />
         <TextInput style={styles.input} onChangeText={(text) => setPassword(text)} placeholder={'escriba su contraseña'}/>
         <TouchableOpacity style={styles.boton} onPress={async () => {
-                await singUp(email, password)
+                await signUp(email, password)
                 navigation.navigate('Login');
                 }
             }>

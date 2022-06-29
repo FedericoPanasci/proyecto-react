@@ -9,6 +9,7 @@ const Stack = createStackNavigator();
 export default () => (
     <Stack.Navigator
         screenOptions={{
+            headerShown:false,
             headerStyle:{
                 backgroundColor: COLORS.primary
             },

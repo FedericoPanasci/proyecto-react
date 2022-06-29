@@ -6,8 +6,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import auth from '../stacks/auth';
+import { logout } from '../app/services/api';
+import { COLORS } from '../constants/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,8 +19,16 @@ export default () => (
             options={{
                 title: 'shop',
                 headerShown: false,
-                tabBarShowLabel:false,
+                tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar,
+                headerStyle: styles.header,
+                headerRight: (props) => (
+                    <TouchableOpacity onPress={logout}>
+                        <Text style={styles.titleHeader}>
+                            Log Out
+                        </Text>
+                    </TouchableOpacity>
+                ),
                 tabBarIcon: () => 
                 <View>
                     <Ionicons name="home" size={30} color="#rgb(21, 134, 158)"/>
@@ -28,10 +38,24 @@ export default () => (
         />
         <Tab.Screen name='Cart' component={Cart}
             options={{
-                title: 'cart',
-                headerShown: false,
+                title: 'Cart',
+                headerShown: true,
                 tabBarShowLabel:false,
                 tabBarStyle: styles.tabBar,
+                headerStyle:{
+                    backgroundColor: COLORS.primary
+                },
+                headerTintColor: COLORS.secondary,
+                headerTitleStyle: {
+                    fontWeight: 'bold'
+                },
+                headerRight: (props) => (
+                    <TouchableOpacity onPress={logout}>
+                        <Text style={styles.titleHeader}>
+                            Log Out
+                        </Text>
+                    </TouchableOpacity>
+                ),
                 tabBarIcon: () => 
                 <View>
                     <Ionicons name="cart" size={30} color="#rgb(21, 134, 158)"/>
@@ -42,9 +66,23 @@ export default () => (
         <Tab.Screen name='Edit' component={Edit}
             options={{
                 title: 'edit',
-                headerShown: false,
+                headerShown: true,
                 tabBarShowLabel:false,
                 tabBarStyle: styles.tabBar,
+                headerStyle:{
+                    backgroundColor: COLORS.primary
+                },
+                headerTintColor: COLORS.secondary,
+                headerTitleStyle: {
+                    fontWeight: 'bold'
+                },
+                headerRight: (props) => (
+                    <TouchableOpacity onPress={logout}>
+                        <Text style={styles.titleHeader}>
+                            Log Out
+                        </Text>
+                    </TouchableOpacity>
+                ),
                 tabBarIcon: () => 
                 <View>
                     <AntDesign name="edit" size={30} color="#rgb(21, 134, 158)"/>
@@ -55,9 +93,23 @@ export default () => (
         <Tab.Screen name='Auth' component={auth}
             options={{
                 title: 'auth',
-                headerShown: false,
+                headerShown: true,
                 tabBarShowLabel:false,
                 tabBarStyle: styles.tabBar,
+                headerStyle:{
+                    backgroundColor: COLORS.primary
+                },
+                headerTintColor: COLORS.secondary,
+                headerTitleStyle: {
+                    fontWeight: 'bold'
+                },
+                headerRight: (props) => (
+                    <TouchableOpacity onPress={logout}>
+                        <Text style={styles.titleHeader}>
+                            Log Out
+                        </Text>
+                    </TouchableOpacity>
+                ),
                 tabBarIcon: () => 
                 <View>
                     <MaterialCommunityIcons name="account" size={30} color="#rgb(21, 134, 158)"/>
@@ -85,5 +137,7 @@ const styles = StyleSheet.create({
         color: 'rgb(21, 134, 158)',
         textAlign: 'center',
         paddingTop: 5
+    }, titleHeader: {
+        color: COLORS.secondary
     }
 })
