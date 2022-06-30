@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { getItemById } from '../app/services/prods'
-import { createItem } from '../app/services/cart'
+import { createItem, getItems } from '../app/services/cart'
+import { AppContext } from '../app/Provider'
 
 const Details = ({route}) => {
   const [prods, setProds] = useState([]);
+  const [state, setState] = useContext(AppContext);
   useEffect(() => {
     getItemById(route.params.id).then((res) => {
       setProds(res);
@@ -13,6 +15,11 @@ const Details = ({route}) => {
 
   const addToCart = () => {
     createItem(prods);
+    getItems().then((res) => {
+      const obj = res;
+      console.log(obj);
+      setState(obj)
+    }) 
   }
 
   return (

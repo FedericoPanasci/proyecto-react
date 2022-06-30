@@ -2,6 +2,7 @@
 // import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity, Modal } from 'react-native';
 // import ModalMio from './components/Modal';
 
+import Provider from "./src/app/Provider";
 import Navigation from "./src/navigation";
 
 // export default function App() {
@@ -90,5 +91,5 @@ import Navigation from "./src/navigation";
 // });
 
 
-const App = () => <Navigation/>
+const App = () => <Provider><Navigation/></Provider>
 export default App;

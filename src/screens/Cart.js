@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -7,16 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { AppContext } from "../app/Provider";
 import { deleteItem, getItems } from "../app/services/cart";
 
 const Cart = () => {
-  const [prods, setProds] = useState([]);
   const [itemSelected, setItemSelected] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [state, setState] = useContext(AppContext);
 
   function sumProds() {
     let suma = 0;
-    prods.map((p) => (suma += parseInt(p.price)));
+    state.map((p) => (suma += parseInt(p.price)));
     return suma;
   }
 
@@ -26,6 +27,7 @@ const Cart = () => {
     setModalVisible(false);
     getItems().then((res) => {
       setProds(res);
+      setState(res);
     });
   };
 
@@ -39,12 +41,13 @@ const Cart = () => {
       console.log('render cart');
     });
   }, []);
+  console.log(state);
 
   return (
     <>
       <View>
         <FlatList
-          data={prods}
+          data={state}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {

@@ -113,7 +113,7 @@ export default () => (
                 tabBarIcon: () => 
                 <View>
                     <MaterialCommunityIcons name="account" size={30} color="#rgb(21, 134, 158)"/>
-                    <Text style={styles.title}>Auth</Text>
+                    <Text style={styles.title}>Account</Text>
                 </View>
             }}
         />            
