@@ -14,12 +14,19 @@ import { createItem } from "../app/services/orders";
 const Cart = () => {
   const [itemSelected, setItemSelected] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [state, setState, clear] = useContext(AppContext);
+  const [state, setState] = useContext(AppContext);
+
+  function allDeleteCart(){
+    getItems().then((res) => {
+      res.map(r => deleteItem(r.id))
+    })
+  } 
 
   const addOrder = () => {
-    createItem({ items: state.items, user: state.user });
+    createItem({ items: state.items, user: state.user, total: sumProds() });
     setState({...state, items: []})
     alert("Se realizo su compra con exito, muchas gracias por elegirnos");
+    allDeleteCart()
   };
 
   function sumProds() {
