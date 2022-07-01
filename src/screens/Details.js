@@ -18,7 +18,7 @@ const Details = ({route}) => {
     getItems().then((res) => {
       const obj = res;
       console.log(obj);
-      setState(obj)
+      setState({...state, items: obj})
     }) 
   }
 

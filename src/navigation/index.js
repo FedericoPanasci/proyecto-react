@@ -18,7 +18,7 @@ const Nav = () => {
             if(user){
                 setIsLogged(true);
                 getItems().then((res) => {
-                    setState(res);
+                    setState({items: res, user: user.email});
                 })
                 console.log('user is logged');
                 console.log(user);

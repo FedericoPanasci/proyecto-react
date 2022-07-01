@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -9,15 +9,22 @@ import {
 } from "react-native";
 import { AppContext } from "../app/Provider";
 import { deleteItem, getItems } from "../app/services/cart";
+import { createItem } from "../app/services/orders";
 
 const Cart = () => {
   const [itemSelected, setItemSelected] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [state, setState] = useContext(AppContext);
+  const [state, setState, clear] = useContext(AppContext);
+
+  const addOrder = () => {
+    createItem({ items: state.items, user: state.user });
+    setState({...state, items: []})
+    alert("Se realizo su compra con exito, muchas gracias por elegirnos");
+  };
 
   function sumProds() {
     let suma = 0;
-    state.map((p) => (suma += parseInt(p.price)));
+    state.items.map((p) => (suma += parseInt(p.price)));
     return suma;
   }
 
@@ -26,8 +33,7 @@ const Cart = () => {
     setItemSelected({});
     setModalVisible(false);
     getItems().then((res) => {
-      setProds(res);
-      setState(res);
+      setState({ ...state, items: res });
     });
   };
 
@@ -35,19 +41,11 @@ const Cart = () => {
     setModalVisible(false);
   };
 
-  useEffect(() => {
-    getItems().then((res) => {
-      setProds(res);
-      console.log('render cart');
-    });
-  }, []);
-  console.log(state);
-
   return (
     <>
       <View>
         <FlatList
-          data={state}
+          data={state.items}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
@@ -60,23 +58,23 @@ const Cart = () => {
           )}
           keyExtractor={(item) => item.id}
         />
+
         <Modal visible={modalVisible} animationType="slide" transparent="false">
-        <View style={styles.modalView}>
-          <TouchableOpacity onPress={onHandlerDelete}>
-            <Text>
-              borrar
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={closeModal}>
-            <Text>
-              volver
-            </Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.modalView}>
+            <TouchableOpacity onPress={onHandlerDelete}>
+              <Text>borrar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={closeModal}>
+              <Text>volver</Text>
+            </TouchableOpacity>
+          </View>
         </Modal>
         <Text style={styles.total} key={"total"}>
           Total: ${sumProds()}
         </Text>
+        <TouchableOpacity onPress={addOrder}>
+          <Text>Realizar compra</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -115,5 +113,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "rgb(80, 28, 17)",
     backgroundColor: "rgb(21, 134, 158)",
-  }
+  },
 });
